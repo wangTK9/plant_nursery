@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao Diện Quản Trị</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .form-container,
+        .plant-list {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container form label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container form input[type="text"],
+        .form-container form input[type="number"],
+        .form-container form input[type="date"],
+        .form-container form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container form input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .form-container form input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .plant-list ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .plant-list li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: calc(30% - 20px);
+            background-color: #f9f9f9;
+        }
+
+        .plant-list img {
+            max-width: 100px;
+            max-height: 75px;
+            margin-bottom: 10px;
+        }
+
+        .plant-list h3 {
+            margin: 10px 0;
+        }
+
+        .plant-actions button {
+            background-color: rgb(55, 144, 48);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .plant-actions button.delete {
+            background-color: #dc3545;
+            width: 87px;
+        }
+
+        .update-form {
+            display: none;
+            flex-direction: column;
+        }
+
+        .update-form.active {
+            display: flex;
+        }
+    </style>
+    <script>
+        function toggleUpdateForm(id) {
+            const form = document.getElementById(`update-form-${id}`);
+            form.classList.toggle('active');
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quản Trị</h1>
+
+        <div class="form-container">
+            <h2>Thêm Cây Mới</h2>
+            <form action="/admin/add" method="POST">
+                <label for="name">Tên:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="variety">Giống Loài:</label>
+                <input type="text" id="variety" name="variety" required>
+
+                <label for="plant_code">Mã Cây:</label>
+                <input type="text" id="plant_code" name="plant_code" required>
+
+                <label for="price">Giá:</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+
+                <label for="planting_date">Ngày Trồng:</label>
+                <input type="date" id="planting_date" name="planting_date" required>
+
+                <label for="location">Khu Vực:</label>
+                <input type="text" id="location" name="location" required>
+
+                <label for="health_status">Tình Trạng Cây:</label>
+                <input type="text" id="health_status" name="health_status" required>
+
+                <label for="notes">Ghi Chú:</label>
+                <textarea id="notes" name="notes" rows="4"></textarea>
+
+                <label for="image">Ảnh (URL):</label>
+                <input type="text" id="image" name="image">
+
+                <input type="submit" value="Thêm Cây">
+            </form>
+        </div>
+
+        <div class="plant-list">
+            <h2>Danh Sách Cây</h2>
+            <ul>
+                {% for plant in plants %}
+                <li>
+                    <img src="{{ plant.image }}" alt="Ảnh Cây">
+                    <h3>{{ plant.name }}</h3>
+                    <p><strong>Giống Loài:</strong> {{ plant.variety }}</p>
+                    <p><strong>Mã Cây:</strong> {{ plant.plant_code }}</p>
+                    <p><strong>Giá:</strong> {{ plant.price }}</p>
+                    <p><strong>Ngày Trồng:</strong> {{ plant.planting_date }}</p>
+                    <p><strong>Khu Vực:</strong> {{ plant.location }}</p>
+                    <p><strong>Tình Trạng Cây:</strong> {{ plant.health_status }}</p>
+                    <p><strong>Ghi Chú:</strong> {{ plant.notes }}</p>
+                    <div class="plant-actions">
+                        <button onclick="toggleUpdateForm('{{ plant._id }}')">Cập nhật</button>
+                        <form action="/admin/delete/{{ plant._id }}" method="POST">
+                            <button type="submit" class="delete">Xóa</button>
+                        </form>
+                    </div>
+                    <form id="update-form-{{ plant._id }}" class="update-form" action="/admin/update/{{ plant._id }}"
+                        method="POST">
+                        <label for="name">Tên:</label>
+                        <input type="text" id="name" name="name" value="{{ plant.name }}" required>
+                        <label for="variety">Giống Loài:</label>
+                        <input type="text" id="variety" name="variety" value="{{ plant.variety }}" required>
+                        <label for="plant_code">Mã Cây:</label>
+                        <input type="text" id="plant_code" name="plant_code" value="{{ plant.plant_code }}" required>
+                        <label for="price">Giá:</label>
+                        <input type="number" id="price" name="price" value="{{ plant.price }}" step="0.01" required>
+                        <label for="planting_date">Ngày Trồng:</label>
+                        <input type="date" id="planting_date" name="planting_date" value="{{ plant.planting_date }}"
+                            required>
+                        <label for="location">Khu Vực:</label>
+                        <input type="text" id="location" name="location" value="{{ plant.location }}" required>
+                        <label for="health_status">Tình Trạng Cây:</label>
+                        <input type="text" id="health_status" name="health_status" value="{{ plant.health_status }}"
+                            required>
+                        <label for="notes">Ghi Chú:</label>
+                        <textarea id="notes" name="notes" rows="2">{{ plant.notes }}</textarea>
+                        <label for="image">Ảnh (URL):</label>
+                        <input type="text" id="image" name="image" value="{{ plant.image }}">
+                        <input type="submit" value="Cập Nhật" style="background-color: #28a745;">
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

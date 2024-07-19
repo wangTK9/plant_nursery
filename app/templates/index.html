@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Management - User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+    <div class="container-user">
+        <div class="navbar-container">
+            <img src="{{ url_for('static', filename='img/1.png') }}" alt="">
+        </div>
+        <div class="gutter">
+            <a href="{{ url_for('main.index') }}">Trang chủ</a>
+        </div>
+        <div class="body-container">
+            <div class="menu-body">
+                <div class="head-menu">DANH MỤC SẢN PHẨM</div>
+                <div class="sub-menu"> <i class="fa-solid fa-caret-right"></i><a href="">Giống cây nhập khẩu</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống cây đặc sản</a></div>
+                <div class="sub-menu hiden "> <i class="fa-solid fa-caret-right"></i><a>Giống Bưởi</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Chanh</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Cam</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Mít</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Nhãn</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Cây Vải</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Xoài</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Hồng Xiêm</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Na</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Chuối</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Hồng giòn</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Ổi</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Bơ</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Cherry</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Vú sữa</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Giống Táo</a></div>
+                <div class="sub-menu hiden"> <i class="fa-solid fa-caret-right"></i><a>Các loại cây ăn quả khác</a>
+                </div>
+            </div>
+            <div class="render-body">
+                <div class="gutter-body">GIỐNG CÂY NHẬP KHẨU</div>
+                <div class="plant-render">
+                    <ul class="main-render">
+                        {% for plant in plants %}
+                        <li>
+                            <img src="{{ plant.image }}" alt="{{ plant.name }}">
+                            <h3>{{ plant.name }}</h3>
+                            <p>Giá: {{ plant.price }}</p>
+                            <a class="btn_detail"
+                                href="{{ url_for('main.plant_detail', plant_code=plant.plant_code) }}">Tìm hiểu</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="column">
+                    <h3>GIỚI THIỆU</h3>
+                    <ul>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Dịch vụ uy tín</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#">Cách đặt dịch vụ</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>SẢN PHẨM CHÍNH</h3>
+                    <ul>
+                        <li><a href="#">Cây dược liệu kinh tế</a></li>
+                        <li><a href="#">Các loại cây thuốc quý</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>THÔNG TIN LIÊN HỆ</h3>
+                    <ul>
+                        <li>TRUNG TÂM CÂY GIỐNG - HỌC VIỆN NÔNG NGHIỆP VIỆT NAM</li>
+                        <li>Địa chỉ: Nguyễn Khiêm Ích, Trâu Quỳ, Gia Lâm, Hà Nội</li>
+                        <li>Hotline: 0981 996 880 và 0339 898 882</li>
+                        <li>Email: hocviennongnghiep4.0@gmail.com</li>
+                        <li>Website: hocviennongnghiep.com</li>
+                    </ul>
+                </div>
+                <div class="column map">
+                    <h3>BẢN ĐỒ CHỈ ĐƯỜNG</h3>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.0845821922585!2d108.24557331485841!3d16.047079944216217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314217ba88cc533b%3A0xa567d3bbeb2c5e52!2sVietnam!5e0!3m2!1sen!2s!4v1630339623835!5m2!1sen!2s"
+                        allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

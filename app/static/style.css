@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+ul {
+  list-style-type: none; /* Loại bỏ dấu chấm */
+  padding: 0; /* Cân chỉnh khoảng cách padding của danh sách */
+}
+
+.fa-caret-right {
+  color: rgb(55, 144, 48);
+  margin-right: 10px;
+}
+.container-user {
+  width: 100%;
+  height: 80em;
+  border: solid 1px;
+}
+.navbar-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+}
+.navbar-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.gutter {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(55, 144, 48);
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-family: "Times New Roman", Times, serif;
+  padding: 0 200px;
+  font-size: 18px;
+}
+.gutter a {
+  color: white;
+}
+.body-container {
+  width: 80%;
+  height: 50em;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.menu-body {
+  width: 20%;
+  height: 100%;
+  border: solid 1px #ccc;
+}
+.render-body {
+  width: 78%;
+  height: 100%;
+  border: solid 1px #ccc;
+}
+.head-menu {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(55, 144, 48);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.sub-menu {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: 1px dashed #ddd;
+}
+.sub-menu a {
+  color: rgb(55, 144, 48);
+}
+.gutter-body {
+  width: 100%;
+  height: 30px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.plant-render {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phần tử con tự động xuống dòng */
+  justify-content: space-between;
+}
+
+.main-render {
+  width: 100%; /* Độ rộng của mỗi phần tử con */
+  margin-bottom: 20px; /* Khoảng cách giữa các phần tử con */
+  display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con bên trong */
+  justify-content: space-between;
+  flex-wrap: wrap; /* Cho phép các phần tử con tự động xuống dòng */
+}
+.main-render img {
+  display: block;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}
+.main-render h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+.main-render p {
+  color: #dd1600;
+  text-align: center;
+  margin: 10px 0;
+}
+.main-render button {
+  margin-top: 10px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  width: 100px;
+  height: 30px;
+  background-color: rgb(55, 144, 48);
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.footer {
+  background-color: rgb(55, 144, 48);
+  color: white;
+  padding: 20px 0;
+}
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.footer .column {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+.footer h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+.footer ul li {
+  margin: 5px 0;
+  color: #ccc;
+}
+.footer ul li a {
+  color: #ccc;
+  text-decoration: none;
+}
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+.footer .map {
+  flex: 1;
+  min-width: 200px;
+}
+.footer .map iframe {
+  width: 100%;
+  height: 200px;
+  border: 0;
+}
+.btn_detail {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(55, 144, 48);
+}
+.btn_detail {
+  color: white;
+  letter-spacing: 1px;
+}
+
+.hiden a {
+  color: #ccc;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Plant Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .container {
+            width: 100%;
+            height: 30em;
+        }
+
+        .plant_container {
+            width: 45%;
+            height: 22em;
+            display: flex;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 20px;
+            border: solid 1px #ccc;
+            border-radius: 10px;
+
+
+        }
+
+        .img_plant {
+            width: 50%;
+            height: 100%;
+        }
+
+        .img_plant img {
+            display: block;
+            width: 90%;
+            height: 80%;
+            object-fit: cover;
+        }
+
+        .conent_plant {
+            width: 50%;
+            height: 100%;
+            line-height: 32px;
+        }
+
+        .back-link {
+            display: block;
+            width: 100px;
+            height: 30px;
+            cursor: pointer;
+            background-color: rgb(55, 144, 48);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar-container">
+            <img src="{{ url_for('static', filename='img/1.png') }}" alt="">
+        </div>
+        <div class="gutter">
+            <a href="{{ url_for('main.index') }}">Trang chủ</a>
+        </div>
+        <div class="plant_container">
+            <div class="img_plant">
+                <img src="{{ plant.image }}" alt="{{ plant.name }}">
+            </div>
+            <div class="conent_plant">
+                <h2>{{ plant.name }}</h2>
+                <p><strong>Giá:</strong> {{ plant.price }}</p>
+                <p><strong>Ngày trồng:</strong> {{ plant.planting_date }}</p>
+                <p><strong>Vị trí:</strong> {{ plant.location }}</p>
+                <p><strong>Tình trạng sức khỏe:</strong> {{ plant.health_status }}</p>
+                <p><strong>Ghi chú:</strong> {{ plant.notes }}</p>
+                <a class="back-link" href="{{ url_for('main.index') }}">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
